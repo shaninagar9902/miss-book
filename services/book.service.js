@@ -45,7 +45,7 @@ function getNextBookId(bookId) {
         })
 }
 
-function getEmptyBook(title = '', amount = 0) {
+function getEmptyBook(title = '', amount = '') {
     return {
         id: '',
         title,

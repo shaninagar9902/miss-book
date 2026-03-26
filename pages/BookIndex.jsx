@@ -5,14 +5,16 @@ import { BooksDetails } from "./BooksDetails.jsx"
 const { useState, useEffect } = React
 
 export function BookIndex() {
-    const [book, setBook] = useState(null)
+    const [book, setBook] = useState([])
     const [selectedBook, setSelectedBook] = useState(null)
 
     useEffect(() => {
-        bookService.get(bookId).then(fetchedBook => {
-            setBook(fetchedBook)
-        })
-    }, [bookId])
+        loadBook()
+        // bookService.get(bookId).then(fetchedBook => {
+        //     setBook(fetchedBook)
+        // })
+        // }, [bookId])
+    }, [])
 
     function onRemoveBook(bookId) {
         bookService.remove(bookId).then(() => {
@@ -20,9 +22,28 @@ export function BookIndex() {
         })
     }
 
+    function onSelectBook(bookId) {
+        setSelectedBook(bookId)
+    }
+
+    function loadBook() {
+        bookService.query().then(books => { setBook(books) })
+    }
+
+    if (!book) return <div>Loading...</div>
+
     return (
-        <section>
-            <h1>Our books</h1>
+        <section className="book-index">
+            {!selectedBook &&
+                <React.Fragment>
+                    <BookList books={book}
+                        onRemoveBook={onRemoveBook}
+                        onSelectBook={onSelectBook} />
+                </React.Fragment>}
+            {selectedBook && (
+                <BooksDetails
+                    onBack={() => onSelectBook(null)}
+                    bookId={selectedBook} />)}
         </section>
     )
 }

@@ -3,7 +3,6 @@ import { storageService } from './async-storage.service.js'
 import { booksData } from "../services/books-data.service.js"
 
 const BOOK_KEY = 'bookDB'
-// var gFilterBy = { txt: '', minSpeed: 0 }
 _createBooks()
 
 export const bookService = {
@@ -12,12 +11,22 @@ export const bookService = {
     remove,
     save,
     getNextBookId,
-    // getFilterBy,
-    getEmptyBook
+    getEmptyBook,
+    getDefaultFilter
 }
 
-function query() {
+function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
+        .then(books => {
+            if (filterBy.title) {
+                const regEXP = new RegExp(filterBy.title, 'i')
+                books = books.filter(book => regEXP.test(book.title))
+            }
+            if (filterBy.minPrice) {
+                books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
+            }
+            return books
+        })
 }
 
 function get(bookId) {
@@ -32,7 +41,8 @@ function save(book) {
     if (book.id) {
         return storageService.put(BOOK_KEY, book)
     } else {
-        return storageService.post(BOOK_KEY, book)
+        const newBook = _createBook(book.title, book.amount)
+        return storageService.post(BOOK_KEY, newBook)
     }
 }
 
@@ -69,6 +79,8 @@ function _createBook(title, amount = 120) {
     book.id = utilService.makeId()
     return book
 }
+
+function getDefaultFilter() { return { title: '', minPrice: '' } }
 
 // function getFilterBy() {
 //     return { ...gFilterBy }

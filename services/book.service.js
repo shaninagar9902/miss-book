@@ -59,7 +59,7 @@ function getEmptyBook(title = '', amount = '') {
     return {
         id: '',
         title,
-        listPrice: { amount, currencyCode: "EUR", isOnSale: false }
+        listPrice: { amount, currencyCode: "ILS", isOnSale: false }
     }
 }
 

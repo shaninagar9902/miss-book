@@ -7,12 +7,12 @@ import { bookService } from "../services/book.service.js"
 const { useState, useEffect } = React
 
 export function BookIndex() {
-    const [book, setBook] = useState([])
+    const [books, setBooks] = useState([])
     const [selectedBook, setSelectedBook] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
     useEffect(() => {
-        loadBook()
+        bookService.query(filterBy).then(books => setBooks(books))
         // bookService.get(bookId).then(fetchedBook => {
         //     setBook(fetchedBook)
         // })
@@ -21,13 +21,13 @@ export function BookIndex() {
 
     function onRemoveBook(bookId) {
         bookService.remove(bookId).then(() => {
-            setBook(prevBook => prevBook.filter(book => bookId !== book.id))
+            setBooks(prevBooks => prevBooks.filter(book => bookId !== book.id))
         })
     }
 
     function onAddBook(bookData) {
         bookService.save(bookData).then(savedBook => {
-            setBook(prevBook => [savedBook, ...prevBook])
+            setBooks(prevBook => [savedBook, ...prevBook])
         })
     }
 
@@ -40,11 +40,7 @@ export function BookIndex() {
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
 
-    function loadBook() {
-        bookService.query(filterBy).then(books => setBook(books))
-    }
-
-    if (!book) return <div>Loading...</div>
+    if (!books) return <div>Loading...</div>
     return (
         <section className="book-index">
             {!selectedBook &&
@@ -52,7 +48,7 @@ export function BookIndex() {
                     <BookEdit onAddBook={onAddBook} />
                     <BookFilter filterBy={filterBy}
                         onSetFilterBy={onSetFilterBy} />
-                    <BookList books={book}
+                    <BookList books={books}
                         onRemoveBook={onRemoveBook}
                         onSelectBook={onSelectBook} />
                 </React.Fragment>}

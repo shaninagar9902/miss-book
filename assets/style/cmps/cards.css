@@ -6,3 +6,9 @@
     padding: 10px;
     /* gap: 8px; */
 }
+
+.book-preview {
+    gap: 8px;
+    margin: 8px;
+    padding: 8px;
+}

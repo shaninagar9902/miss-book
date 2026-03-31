@@ -1,0 +1,26 @@
+.home {
+    background-image: url('../../BooksImages/bg.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-content: center;
+    background-size: cover;
+    align-items: flex-end;
+    position: relative;
+    display: flex;
+    padding-bottom: 40px;
+    height: 80vh;
+    width: 100vw;
+}
+
+.home-container {
+    background-color: whitesmoke;
+    padding: 60px 80px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 15px 35px var(--shadow);
+    max-width: 600px;
+    width: 90%;
+    bottom: 10px;
+    /* transform: translateY(40px); */
+}

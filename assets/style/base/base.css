@@ -1,13 +1,18 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
+  overscroll-behavior-y: none;
 }
 
 body {
-  margin: 0;
   color: var(--gray3);
+  background-color: var(--cream);
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1,
@@ -20,16 +25,10 @@ h6 {
   font-family: 'Edu VIC WA NT Beginner', cursive;
 }
 
-p {
-  margin: 0 0 1em;
-}
-
 a {
   text-decoration: none;
   color: unset;
 }
-
-
 
 /* Dont stretch my Media */
 img,

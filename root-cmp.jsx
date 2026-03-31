@@ -13,9 +13,9 @@ export function App() {
             <header className="app-header">
                 <h1>Miss book</h1>
                 <nav className='navbar'>
-                    <a onClick={(ev) => { ev.preventDefault(); setPage('About') }} href="">About</a>
-                    <a onClick={(ev) => { ev.preventDefault(); setPage('Home') }} href="">Home</a>
-                    <a onClick={(ev) => { ev.preventDefault(); setPage('BookIndex') }} href="">Books</a>
+                    <a onClick={(ev) => { ev.preventDefault(); setPage('Home') }} href="#">Home</a>
+                    <a onClick={(ev) => { ev.preventDefault(); setPage('About') }} href="#">About</a>
+                    <a onClick={(ev) => { ev.preventDefault(); setPage('BookIndex') }} href="#">Books</a>
                 </nav>
             </header>
 

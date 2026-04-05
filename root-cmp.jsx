@@ -1,6 +1,6 @@
 import { Home } from './pages/Home.jsx';
-import { About } from '../pages/About.jsx';
-import { BookIndex } from '../pages/BookIndex.jsx';
+import { About } from './pages/About.jsx';
+import { BookIndex } from './pages/BookIndex.jsx';
 
 const { useState } = React;
 

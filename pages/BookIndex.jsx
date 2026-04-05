@@ -1,6 +1,7 @@
 import { BookList } from "../cmps/BookList.jsx"
 import { BookEdit } from "../cmps/BookEdit.jsx"
 import { BookFilter } from "../cmps/BookFilter.jsx"
+// import { BookPreview } from "../cmps/BookPreview.jsx"
 import { BooksDetails } from "../pages/BooksDetails.jsx"
 import { bookService } from "../services/book.service.js"
 
@@ -8,14 +9,15 @@ const { useState, useEffect } = React
 
 export function BookIndex() {
     const [books, setBooks] = useState([])
-    // const [selectedBook, setSelectedBook] = useState(null)
+    const [selectedBook, setSelectedBook] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
     useEffect(() => {
-        bookService.query(filterBy).then(books => setBooks(books))
+        bookService.query(filterBy).then(books => { setBooks(books) })
         // bookService.get(bookId).then(fetchedBook => {
         //     setBook(fetchedBook)
         // })
+        // .catch(err => alert('Error!', err))
         // }, [bookId])
     }, [filterBy])
 
@@ -33,16 +35,16 @@ export function BookIndex() {
             .catch(err => alert('Error!', err))
     }
 
-    // function onSelectBook(bookId) {
-    //     setSelectedBook(bookId)
-    // }
+    function onSelectBook(bookId) {
+        setSelectedBook(bookId)
+    }
 
     function onSetFilterBy(filterBy) {
         // console.log('filterBy:', filterBy);
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
 
-    if (!books) return <div>Loading...</div>
+    if (!books.length) return <div>Loading...</div>
     return (
         <section className="book-index">
             {!selectedBook &&
@@ -50,14 +52,14 @@ export function BookIndex() {
                     <BookEdit onAddBook={onAddBook} />
                     <BookFilter filterBy={filterBy}
                         onSetFilterBy={onSetFilterBy} />
-                    {/* <BookList books={books} */}
-                    {/* onRemoveBook={onRemoveBook} */}
-                    {/* // onSelectBook={onSelectBook} /> */}
+                    <BookList books={books}
+                        onRemoveBook={onRemoveBook}
+                        onSelectBook={onSelectBook} />
                 </React.Fragment>}
-            {/* {selectedBook && ( */}
-                // <BooksDetails
-                    // onBack={() => onSelectBook(null)}
-                    // bookId={selectedBook} />)}
+            {selectedBook && (
+                <BooksDetails
+                    onBack={() => onSelectBook(null)}
+                    bookId={selectedBook} />)}
         </section>
     )
 }

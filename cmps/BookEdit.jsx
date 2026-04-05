@@ -4,7 +4,8 @@ export function BookEdit({ onAddBook }) {
 
     const [bookToEdit, setBookToEdit] = useState({ title: '', amount: '' })
 
-    function handleChange({ target }) {
+    function handleChange(
+        { target }) {
         const { name, value, type } = target
         setBookToEdit(prev => ({
             ...prev,

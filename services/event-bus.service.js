@@ -19,8 +19,6 @@ function createEventEmitter() {
 }
 
 export const eventBusService = createEventEmitter()
-
-
 export function showUserMsg(msg) {
     eventBusService.emit('show-user-msg', msg)
 }
@@ -30,10 +28,6 @@ export function showSuccessMsg(txt) {
 export function showErrorMsg(txt) {
     showUserMsg({ txt, type: 'error' })
 }
-
-
-
-
 
 // Service Testing:
 // Example for using the service
@@ -48,23 +42,5 @@ eventBusService.emit('some-event', { num: 100 })
 // }, 2000)
 setTimeout(() => eventBusService.emit('some-event', 100), 3000)
 
-
-
-
-
-
-
-
 window.showSuccessMsg = showSuccessMsg
 window.showErrorMsg = showErrorMsg
-
-
-
-
-
-
-
-
-
-
-

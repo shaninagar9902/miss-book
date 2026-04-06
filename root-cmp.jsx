@@ -16,7 +16,7 @@ export function App() {
         <Router>
             <section className="app">
                 <header className="app-header">
-                    <h1>Miss book</h1>
+                    <NavLink to="/" className="title">Miss Book</NavLink>
                     <nav className='navbar'>
                         <NavLink to="/">Home</NavLink>
                         <NavLink to="/about">About</NavLink>

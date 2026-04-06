@@ -11,12 +11,15 @@ export function BookEdit() {
 
     useEffect(() => {
         if (params.bookId) load()
-    }, [])
+    }, [params.bookId])
 
     function load() {
         bookService.get(params.bookId)
             .then(setBookToEdit)
-            .catch(err => alert('Error!', err))
+            .catch(err => {
+                alert('Error!', err)
+                navigate('/book')
+            })
     }
 
     function handleChange({ target }) {
@@ -56,6 +59,7 @@ export function BookEdit() {
     const { title, listPrice } = bookToEdit
     return (
         <section className="book-edit">
+            <button onClick={() => navigate('/book')}>Back</button>
             <form onSubmit={onSaveBook}>
                 <label htmlFor="title">Title:</label>
                 <input id="title" name="title" type="text" value={title} placeholder="Enter Title" onChange={handleChange} />

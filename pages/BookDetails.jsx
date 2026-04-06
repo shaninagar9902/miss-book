@@ -58,10 +58,6 @@ export function BookDetails() {
         if (book.listPrice.isOnSale) return 'On sale!'
     }
 
-    function onBack() {
-        navigate('/book')
-    }
-
     function onReviewAdded() {
         load()
     }
@@ -78,7 +74,7 @@ export function BookDetails() {
 
     return (
         <section className="book-details">
-            <button onClick={onBack}>Back</button>
+            <button onClick={() => navigate('/book')}>Back</button>
             <h1>Book details</h1>
             <h3>ID: {book.id}</h3 >
             <h3>Title: {book.title}</h3 >

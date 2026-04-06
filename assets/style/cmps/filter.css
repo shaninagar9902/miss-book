@@ -1,0 +1,26 @@
+.book-filter {
+    background: var(--surface);
+    border: 1px solid rgba(90, 107, 85, 0.12);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-lg) var(--sp-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.book-filter h2 {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--clr1-dark);
+    margin-bottom: var(--sp-md);
+}
+
+.book-filter form {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--sp-md);
+    flex-wrap: wrap;
+}
+
+.book-filter form>* {
+    flex: 1;
+    min-width: 160px;
+}

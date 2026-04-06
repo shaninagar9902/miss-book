@@ -6,40 +6,50 @@
 
 html {
   overscroll-behavior-y: none;
+  scroll-behavior: smooth;
 }
 
 body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
   color: var(--gray3);
   background-color: var(--cream);
   overflow-x: hidden;
   width: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: .5em 0 .5em;
-  font-family: 'Edu VIC WA NT Beginner', cursive;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0.5em 0;
+  color: var(--gray3);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
+h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 300; }
+
+p {
+  line-height: 1.75;
+  color: var(--gray4);
 }
 
 a {
   text-decoration: none;
   color: unset;
   cursor: pointer;
+  transition: var(--transition-fast);
 }
 
-/* Dont stretch my Media */
-img,
-embed,
-video,
-object {
-  max-width: 100%
+img, embed, video, object {
+  max-width: 100%;
 }
 
-/* Simple and useful CSS Debugging Technique */
-.debug * {
-  outline: 1px solid gold
-}
+ul { list-style: none; }
+
+/* Debug */
+.debug * { outline: 1px solid gold; }

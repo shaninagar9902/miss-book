@@ -1,0 +1,91 @@
+.reviews {
+  margin: var(--sp-xl) 0;
+}
+
+.reviews h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--clr1-dark);
+  margin-bottom: var(--sp-md);
+  border: none !important;
+}
+
+.reviews ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.reviews li {
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: var(--sp-md) var(--sp-lg);
+  border: 1px solid rgba(90,107,85,0.1);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-lg);
+  flex-wrap: wrap;
+}
+
+.reviews li p {
+  font-size: 14px;
+  color: var(--gray3);
+  margin: 0;
+}
+
+.reviews li p:first-child {
+  font-weight: 500;
+  min-width: 120px;
+}
+
+.reviews li button {
+  margin-left: auto;
+  background: #fde8e8;
+  color: #b94a4a;
+  font-size: 11px;
+  padding: 5px 12px;
+}
+
+.reviews li button:hover {
+  background: #b94a4a;
+  color: #fff;
+}
+
+.add-review {
+  background: var(--clr1bg-light);
+  border: 1px solid rgba(90,107,85,0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-xl);
+  margin: var(--sp-lg) 0;
+}
+
+.add-review h3 {
+  font-style: italic;
+  color: var(--clr1-dark);
+  margin-bottom: var(--sp-lg);
+}
+
+.add-review form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-md);
+}
+
+.add-review form label:nth-child(1),
+.add-review form input[name="fullname"] {
+  grid-column: 1 / -1;
+}
+
+.add-review form button {
+  grid-column: 1 / -1;
+  background: var(--clr1);
+  color: #fff;
+  padding: 12px;
+  margin: 0;
+  margin-top: var(--sp-sm);
+}
+
+.add-review form button:hover {
+  background: var(--clr1-dark);
+}

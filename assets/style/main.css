@@ -11,6 +11,15 @@
 /* Components */
 @import 'cmps/app-header.css';
 @import 'cmps/user-msg.css';
-@import 'cmps/cards.css';
-@import 'cmps/home.css';
-@import 'cmps/about.css';
+@import 'cmps/preview.css';
+@import 'cmps/filter.css';
+@import 'cmps/list.css';
+@import 'cmps/longTxt.css';
+@import 'cmps/review.css';
+
+/* pages */
+@import 'pages/home.css';
+@import 'pages/about.css';
+@import 'pages/details.css';
+@import 'pages/edit.css';
+@import 'pages/index.css';

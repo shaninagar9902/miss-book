@@ -1,17 +1,60 @@
 :root {
-  --clr1: rgb(96, 107, 91);
-  --clr2: rgb(120, 99, 110);
+  /* Brand palette — sage & dusty rose */
+  --clr1:           #5a6b55;
+  --clr1-dark:      #3d4a39;
+  --clr1-light:     #8fa688;
+  --clr1bg:         #c8d5c4;
+  --clr1bg-light:   #e8f0e5;
 
-  --clr1bg: rgb(153, 166, 149);
-  --clr1bg-light: rgb(205, 221, 200);
-  --clr2bg: rgb(233, 206, 221);
-  --clr2bg-light: rgb(247, 185, 219);
+  --clr2:           #8c5d6e;
+  --clr2-dark:      #6b3f50;
+  --clr2-light:     #b88898;
+  --clr2bg:         #e8c8d4;
+  --clr2bg-light:   #f5e4ec;
 
-  --gray1: rgb(240, 240, 240);
-  --gray2: rgb(155, 155, 155);
-  --gray3: rgb(44, 44, 44);
+  /* Neutrals */
+  --gray1: #f7f6f2;
+  --gray2: #c4c2bb;
+  --gray3: #2c2b27;
+  --gray4: #6b6860;
 
-  --black: rgba(255, 255, 255, 0.1);
-  --shadow: rgba(0, 0, 0, 0.2);
-  --cream: #f2f0df;
+  /* Surface */
+  --cream:          #faf8f2;
+  --cream-dark:     #f0ede3;
+  --surface:        #ffffff;
+  --surface-raised: #fffffe;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 4px rgba(60,55,40,0.08);
+  --shadow-md:  0 4px 16px rgba(60,55,40,0.12);
+  --shadow-lg:  0 12px 40px rgba(60,55,40,0.16);
+  --shadow-xl:  0 24px 64px rgba(60,55,40,0.2);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', 'Edu VIC WA NT Beginner', Georgia, serif;
+  --font-body:    'Jost', 'Segoe UI', sans-serif;
+  --font-mono:    'Fira Code', monospace;
+
+  /* Spacing scale */
+  --sp-xs:  4px;
+  --sp-sm:  8px;
+  --sp-md:  16px;
+  --sp-lg:  24px;
+  --sp-xl:  40px;
+  --sp-2xl: 64px;
+
+  /* Border radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast:   all 0.15s ease;
+  --transition-base:   all 0.25s ease;
+  --transition-slow:   all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Header height */
+  --header-h: 64px;
 }

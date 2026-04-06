@@ -1,18 +1,104 @@
+/* ── Inputs ── */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+textarea,
+select {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gray3);
+  background: var(--surface);
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  width: 100%;
+  outline: none;
+  transition: var(--transition-base);
+  appearance: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--clr1);
+  background: var(--clr1bg-light);
+  box-shadow: 0 0 0 3px rgba(90,107,85,0.12);
+}
+
+input::placeholder {
+  color: var(--gray2);
+  font-weight: 300;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray4);
+  display: block;
+  margin-bottom: var(--sp-xs);
+}
+
+/* ── Buttons ── */
 button {
-    cursor: pointer;
-    background-color: var(--clr2bg);
-    margin: 0.5em;
-    border: 0;
-    padding: 0.5em 0.8em;
-    border-radius: 4px;   
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  background: var(--clr2bg);
+  color: var(--clr2-dark);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 9px 20px;
+  transition: var(--transition-base);
+  white-space: nowrap;
 }
 
 button:hover {
-    background-color: var(--clr2);
-    color: white;
-    transition: .3s;
+  background: var(--clr2);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
-input:focus {
-    background-color: var(--clr1bg);
-    transition: background-color 1s;
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Primary variant */
+button.btn-primary {
+  background: var(--clr1);
+  color: #fff;
+}
+
+button.btn-primary:hover {
+  background: var(--clr1-dark);
+}
+
+/* Ghost variant */
+button.btn-ghost {
+  background: transparent;
+  border-color: var(--clr1);
+  color: var(--clr1);
+}
+
+button.btn-ghost:hover {
+  background: var(--clr1);
+  color: #fff;
+}
+
+/* Danger variant */
+button.btn-danger {
+  background: #fde8e8;
+  color: #b94a4a;
+}
+
+button.btn-danger:hover {
+  background: #b94a4a;
+  color: #fff;
 }

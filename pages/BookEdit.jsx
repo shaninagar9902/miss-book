@@ -61,7 +61,7 @@ export function BookEdit() {
                 <input id="title" name="title" type="text" value={title} placeholder="Enter Title" onChange={handleChange} />
                 <label htmlFor="price">Price:</label>
                 <input id="price" name="price" type="number" value={listPrice.amount} placeholder="Enter Price" onChange={handleChange} />
-                <button>Add Book</button>
+                <button>{params.bookId ? 'Update Book' : 'Add Book'}</button>
             </form>
         </section>
     )

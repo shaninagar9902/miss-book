@@ -12,7 +12,9 @@ export const bookService = {
     save,
     getNextBookId,
     getEmptyBook,
-    getDefaultFilter
+    getDefaultFilter,
+    addReview,
+    removeReview
 }
 
 function query(filterBy = {}) {
@@ -83,12 +85,20 @@ function _createBook(title, amount = 120) {
 
 function getDefaultFilter() { return { title: '', minPrice: '' } }
 
-// function getFilterBy() {
-//     return { ...gFilterBy }
-// }
+function addReview(bookId, review) {
+    return storageService.get(BOOK_KEY, bookId)
+        .then(book => {
+            const newReview = { ...review, id: utilService.makeId() }
+            book.reviews = book.reviews || []
+            book.reviews.unshift(newReview)
+            return storageService.put(BOOK_KEY, book)
+        })
+}
 
-// function setFilterBy(filterBy = {}) {
-//     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
-//     if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
-//     return gFilterBy
-// }
+function removeReview(bookId, reviewId) {
+    return storageService.get(BOOK_KEY, bookId)
+        .then(book => {
+            book.reviews = book.reviews.filter(R => R.id !== reviewId)
+            return storageService.put(BOOK_KEY, book)
+        })
+}

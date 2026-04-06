@@ -36,9 +36,9 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
             <h2>Filter our books</h2>
             <form onSubmit={onSubmitFilter}>
                 <label htmlFor="title">Title: </label>
-                <input id="title" name="title" type="text" value={title} placeholder="By title..." onChange={handleChanges} />
+                <input required id="title" name="title" type="text" value={title} placeholder="By title..." onChange={handleChanges} />
                 <label htmlFor="minPrice">Price: </label>
-                <input id="minPrice" name="minPrice" type="number" value={minPrice} placeholder="By price..." onChange={handleChanges} />
+                <input required id="minPrice" name="minPrice" type="number" value={minPrice} placeholder="By price..." onChange={handleChanges} />
                 <button>Set Filter</button>
             </form>
         </section>

@@ -1,43 +1,37 @@
+
 import { BookList } from "../cmps/BookList.jsx"
-import { BookEdit } from "../cmps/BookEdit.jsx"
 import { BookFilter } from "../cmps/BookFilter.jsx"
-// import { BookPreview } from "../cmps/BookPreview.jsx"
-import { BooksDetails } from "../pages/BooksDetails.jsx"
 import { bookService } from "../services/book.service.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useState, useEffect } = React
+const { Link } = ReactRouterDOM
 
 export function BookIndex() {
     const [books, setBooks] = useState([])
-    const [selectedBook, setSelectedBook] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
     useEffect(() => {
-        bookService.query(filterBy).then(books => { setBooks(books) })
-        // bookService.get(bookId).then(fetchedBook => {
-        //     setBook(fetchedBook)
-        // })
-        // .catch(err => alert('Error!', err))
-        // }, [bookId])
+        bookService.query(filterBy)
+            .then(books => { setBooks(books) })
+            .catch(err => alert('Error!', err))
     }, [filterBy])
 
     function onRemoveBook(bookId) {
         bookService.remove(bookId).then(() => {
             setBooks(prevBooks => prevBooks.filter(book => bookId !== book.id))
+            showSuccessMsg(`Book removed! ${bookId}`)
         })
             .catch(err => alert('Error!', err))
+        showErrorMsg(`Problem Removing` + bookId)
     }
 
-    function onAddBook(bookData) {
-        bookService.save(bookData).then(savedBook => {
-            setBooks(prevBook => [savedBook, ...prevBook])
-        })
-            .catch(err => alert('Error!', err))
-    }
-
-    function onSelectBook(bookId) {
-        setSelectedBook(bookId)
-    }
+    // function onAddBook(bookData) {
+    //     bookService.save(bookData).then(savedBook => {
+    //         setBooks(prevBook => [savedBook, ...prevBook])
+    //     })
+    //         .catch(err => alert('Error!', err))
+    // }
 
     function onSetFilterBy(filterBy) {
         // console.log('filterBy:', filterBy);
@@ -47,19 +41,11 @@ export function BookIndex() {
     if (!books.length) return <div>Loading...</div>
     return (
         <section className="book-index">
-            {!selectedBook &&
-                <React.Fragment>
-                    <BookEdit onAddBook={onAddBook} />
-                    <BookFilter filterBy={filterBy}
-                        onSetFilterBy={onSetFilterBy} />
-                    <BookList books={books}
-                        onRemoveBook={onRemoveBook}
-                        onSelectBook={onSelectBook} />
-                </React.Fragment>}
-            {selectedBook && (
-                <BooksDetails
-                    onBack={() => onSelectBook(null)}
-                    bookId={selectedBook} />)}
+            <BookFilter filterBy={filterBy}
+                onSetFilterBy={onSetFilterBy} />
+            <Link to="/book/edit">Add Book</Link>
+            <BookList books={books}
+                onRemoveBook={onRemoveBook} />
         </section>
     )
 }

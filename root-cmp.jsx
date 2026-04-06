@@ -1,29 +1,42 @@
 import { Home } from './pages/Home.jsx';
 import { About } from './pages/About.jsx';
 import { BookIndex } from './pages/BookIndex.jsx';
+import { UserMsg } from './cmps/user-msg.jsx';
+import { BookDetails } from './pages/BookDetails.jsx';
+import { BookEdit } from './pages/BookEdit.jsx';
 
-const { useState } = React;
+const { useState } = React
+const Router = ReactRouterDOM.HashRouter
+const { Routes, Route, Navigate, NavLink } = ReactRouterDOM
 
 export function App() {
 
-    const [page, setPage] = useState('Home')
+    // const [page, setPage] = useState('Home')
 
     return (
-        <section className="app">
-            <header className="app-header">
-                <h1>Miss book</h1>
-                <nav className='navbar'>
-                    <a onClick={(ev) => { ev.preventDefault(); setPage('Home') }} href="#">Home</a>
-                    <a onClick={(ev) => { ev.preventDefault(); setPage('About') }} href="#">About</a>
-                    <a onClick={(ev) => { ev.preventDefault(); setPage('BookIndex') }} href="#">Books</a>
-                </nav>
-            </header>
+        <Router>
+            <section className="app">
+                <header className="app-header">
+                    <h1>Miss book</h1>
+                    <nav className='navbar'>
+                        <NavLink to="/">Home</NavLink>
+                        <NavLink to="/about">About</NavLink>
+                        <NavLink to="/book">Books</NavLink>
+                    </nav>
+                    <UserMsg />
+                </header>
 
-            <main>
-                {page === 'Home' && <Home />}
-                {page === 'About' && <About />}
-                {page === 'BookIndex' && <BookIndex />}
-            </main>
-        </section>
+                <main>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/book" element={<BookIndex />} />
+                        <Route path="/book/edit" element={<BookEdit />} />
+                        <Route path="/book/edit/:bookId" element={<BookEdit />} />
+                        <Route path="/book/:bookId" element={<BookDetails />} />
+                    </Routes>
+                </main>
+            </section>
+        </Router>
     )
 }

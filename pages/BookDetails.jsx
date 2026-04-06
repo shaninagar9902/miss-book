@@ -2,15 +2,34 @@ import { bookService } from "../services/book.service.js"
 import { LongTxt } from "../cmps/LongTxt.jsx"
 
 const { useState, useEffect } = React
+const { useParams, useNavigate, Link } = ReactRouterDOM
 
-export function BooksDetails({ bookId, onBack }) {
+export function BookDetails() {
     const [book, setBook] = useState(null)
+    const [nextBookId, setNextBookId] = useState(null)
+    const params = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        bookService.get(bookId).then(fetchedBook => {
-            setBook(fetchedBook)
-        })
-    }, [bookId])
+        load()
+    }, [params.bookId])
+
+    function load() {
+        bookService.get(params.bookId)
+            .then(fetchedBook => {
+                setBook(fetchedBook)
+            })
+            .catch(err => {
+                console.log('err:', err);
+                navigate('/book')
+            })
+        bookService.getNextBookId(params.bookId)
+            .then(setNextBookId)
+            .catch(err => {
+                console.log('err:', err)
+            })
+
+    }
 
     function getReadingType() {
         let pageCount = book.pageCount
@@ -38,6 +57,10 @@ export function BooksDetails({ bookId, onBack }) {
         if (book.listPrice.isOnSale) return 'On sale!'
     }
 
+    function onBack() {
+        navigate('/book')
+    }
+
     if (!book) return <div>Loading...</div>
 
     return (
@@ -54,6 +77,7 @@ export function BooksDetails({ bookId, onBack }) {
                 <LongTxt txt={book.description} length={100} />
             </div>
             <button onClick={onBack}>Back</button>
+            {nextBookId && <Link to={`/book/${nextBookId}`}>Next Book</Link>}
         </section >
     )
 }

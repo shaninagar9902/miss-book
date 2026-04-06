@@ -59,6 +59,7 @@ function getEmptyBook(title = '', amount = '') {
     return {
         id: '',
         title,
+        authors: [],
         listPrice: { amount, currencyCode: "ILS", isOnSale: false }
     }
 }

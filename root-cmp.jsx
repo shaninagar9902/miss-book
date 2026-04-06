@@ -7,10 +7,9 @@ import { BookEdit } from './pages/BookEdit.jsx';
 
 const { useState } = React
 const Router = ReactRouterDOM.HashRouter
-const { Routes, Route, Navigate, NavLink } = ReactRouterDOM
+const { Routes, Route, NavLink } = ReactRouterDOM
 
 export function App() {
-
     // const [page, setPage] = useState('Home')
 
     return (

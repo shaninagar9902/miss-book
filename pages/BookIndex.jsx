@@ -18,12 +18,15 @@ export function BookIndex() {
     }, [filterBy])
 
     function onRemoveBook(bookId) {
-        bookService.remove(bookId).then(() => {
-            setBooks(prevBooks => prevBooks.filter(book => bookId !== book.id))
-            showSuccessMsg(`Book removed! ${bookId}`)
-        })
-            .catch(err => alert('Error!', err))
-        showErrorMsg(`Problem Removing` + bookId)
+        bookService.remove(bookId)
+            .then(() => {
+                setBooks(prevBooks => prevBooks.filter(book => bookId !== book.id))
+                showSuccessMsg(`Book removed! ${bookId}`)
+            })
+            .catch(err => {
+                alert('Error!', err)
+                showErrorMsg(`Problem Removing` + bookId)
+            })
     }
 
     // function onAddBook(bookData) {

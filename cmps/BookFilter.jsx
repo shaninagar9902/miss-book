@@ -26,20 +26,16 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
-    function onSubmitFilter(ev) {
-        ev.preventDefault()
-        onSetFilterBy(filterByToEdit)
-    }
-    const { title, minPrice } = filterByToEdit
+    const { title, maxPrice } = filterByToEdit
     return (
         <section className="book-filter">
-            <h2>Filter our books</h2>
-            <form onSubmit={onSubmitFilter}>
-                <label htmlFor="title">Title: </label>
-                <input required id="title" name="title" type="text" value={title} placeholder="By title..." onChange={handleChanges} />
-                <label htmlFor="minPrice">Price: </label>
-                <input required id="minPrice" name="minPrice" type="number" value={minPrice} placeholder="By price..." onChange={handleChanges} />
-                <button>Set Filter</button>
+            <form onSubmit={(ev) => ev.preventDefault()}>
+                <label htmlFor="title">Title:
+                    <input id="title" name="title" type="text" value={title} placeholder="Filter by title..." onChange={handleChanges} />
+                </label>
+                <label htmlFor="maxPrice">Price:
+                    <input id="maxPrice" name="maxPrice" type="number" value={maxPrice || ''} placeholder="Filter by max price..." onChange={handleChanges} />
+                </label>
             </form>
         </section>
     )

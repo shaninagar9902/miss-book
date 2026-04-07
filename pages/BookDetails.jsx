@@ -1,6 +1,7 @@
 import { bookService } from "../services/book.service.js"
 import { LongTxt } from "../cmps/LongTxt.jsx"
 import { AddReview } from "../cmps/AddReview.jsx"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
@@ -64,9 +65,13 @@ export function BookDetails() {
 
     function onRemoveReview(reviewId) {
         bookService.removeReview(params.bookId, reviewId)
-            .then(() => onLoad())
+            .then(() => {
+                showSuccessMsg(`Review removed!`)
+                onLoad()
+            })
             .catch(err => {
                 console.log('err:', err)
+                showErrorMsg(`Problem removing review`)
             })
     }
 

@@ -1,44 +1,24 @@
 .user-msg {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 12px 20px;
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  color: #fff;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  z-index: 9999;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  max-width: 320px;
+    background-color: lightgray;
+    padding: .5em 1em;
+    position: fixed;
+    bottom: 0;
+    right: 1em;
+    color: white;
+    font-weight: bold;
+    border-radius: 2px;
 }
 
 .user-msg.success {
-  background: var(--clr1);
+    border-radius: 3px;
 }
 
 .user-msg.error {
-  background: var(--clr2-dark);
+    border-radius: 3px;
 }
+
 
 .user-msg button {
-  float: right;
-  margin-left: var(--sp-md);
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  padding: 2px 8px;
-  font-size: 11px;
-}
-
-.user-msg button:hover {
-  background: rgba(255,255,255,0.35);
-  transform: none;
-  box-shadow: none;
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+    float: right;
+    margin: 1em;
 }

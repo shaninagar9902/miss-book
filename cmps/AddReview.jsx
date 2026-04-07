@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useState } = React
 
@@ -38,8 +39,14 @@ export function AddReview({ bookId, onReviewAdded }) {
     function onSaveReview(ev) {
         ev.preventDefault()
         bookService.addReview(bookId, bookReview)
-            .then(() => onReviewAdded())
-            .catch(err => alert('Error!', err))
+            .then(() => {
+                showSuccessMsg(`Review saved!`)
+                onReviewAdded()
+            })
+            .catch(err => {
+                alert('Error!', err)
+                showErrorMsg(`Problem saving review`)
+            })
     }
 
     const { fullname, rating, readAt } = bookReview

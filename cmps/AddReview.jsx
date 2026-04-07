@@ -7,14 +7,13 @@ export function AddReview({ bookId, onReviewAdded }) {
         fullname: '',
         rating: 1,
         readAt: ''
-        // readAt: date Now()
     })
 
-    function load() {
-        bookService.get(bookId)
-            .then(onReviewAdded)
-            .catch(err => alert('Error!', err))
-    }
+    // function onLoad() {
+    //     bookService.get(bookId)
+    //         .then(onReviewAdded)
+    //         .catch(err => alert('Error!', err))
+    // }
 
     function handleChange({ target }) {
         const field = target.name
@@ -46,7 +45,6 @@ export function AddReview({ bookId, onReviewAdded }) {
     const { fullname, rating, readAt } = bookReview
 
     return (
-        // load()
         < section className="book-review" >
             <form onSubmit={onSaveReview}>
                 <label htmlFor="fullname">Full Name:</label>

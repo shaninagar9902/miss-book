@@ -13,10 +13,10 @@ export function BookDetails() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        load()
+        onLoad()
     }, [params.bookId])
 
-    function load() {
+    function onLoad() {
         bookService.get(params.bookId)
             .then(fetchedBook => {
                 setBook(fetchedBook)
@@ -34,9 +34,9 @@ export function BookDetails() {
 
     function getReadingType() {
         let pageCount = book.pageCount
-        if (pageCount >= 500) return 'Serious reading'
-        else if (pageCount >= 200) return 'Decent reading'
-        else if (pageCount <= 100) return 'Light reading'
+        if (pageCount >= 500) return '- Serious reading'
+        else if (pageCount >= 200) return '- Decent reading'
+        else if (pageCount <= 100) return '- Light reading'
         return 'Good reading'
     }
 
@@ -59,12 +59,12 @@ export function BookDetails() {
     }
 
     function onReviewAdded() {
-        load()
+        onLoad()
     }
 
     function onRemoveReview(reviewId) {
         bookService.removeReview(params.bookId, reviewId)
-            .then(() => load())
+            .then(() => onLoad())
             .catch(err => {
                 console.log('err:', err)
             })
@@ -79,7 +79,7 @@ export function BookDetails() {
             <h3>ID: {book.id}</h3 >
             <h3>Title: {book.title}</h3 >
             <h3>By: {book.authors.join(',')}, {book.publishedDate} ({getPublish()})</h3 >
-            <h3>{book.pageCount} pages - {getReadingType()}</h3 >
+            <h3>{book.pageCount} pages {getReadingType()}</h3 >
             <h3>Price: <span style={getAmount()}> {book.listPrice.amount} {book.listPrice.currencyCode}</span></h3>
             <h2>{onSale()}</h2>
             <div className="reviews">

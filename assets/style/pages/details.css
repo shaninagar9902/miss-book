@@ -32,10 +32,6 @@
 
 .description-container {
   margin: var(--sp-lg) 0;
-  /* background: var(--cream); */
-  /* border-radius: var(--radius-md); */
-  /* padding: var(--sp-lg); */
-  /* border-left: 3px solid var(--clr1bg); */
 }
 
 .description-container h3 {

@@ -8,7 +8,6 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 
 export function BookDetails() {
     const [book, setBook] = useState(null)
-    const [nextBookId, setNextBookId] = useState(null)
     const [isAddingReview, setIsAddingReview] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
@@ -25,11 +24,6 @@ export function BookDetails() {
             .catch(err => {
                 console.log('err:', err);
                 navigate('/book')
-            })
-        bookService.getNextBookId(params.bookId)
-            .then(setNextBookId)
-            .catch(err => {
-                console.log('err:', err)
             })
     }
 
@@ -113,7 +107,10 @@ export function BookDetails() {
                 <h3>Description:</h3>
                 <LongTxt txt={book.description} length={100} />
             </div>
-            {nextBookId && <Link to={`/book/${nextBookId}`}>Next Book</Link>}
+            <div>
+                <Link to={`/book/${book.prevBookId}`}>Previous Book | </Link>
+                <Link to={`/book/${book.nextBookId}`}>Next Book</Link>
+            </div>
         </section >
     )
 }

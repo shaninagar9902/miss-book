@@ -16,7 +16,6 @@ export function UserMsg() {
         }
     }, [])
 
-
     function onCloseMsg() {
         setMsg(null)
     }

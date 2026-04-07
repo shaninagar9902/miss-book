@@ -10,7 +10,6 @@ export const bookService = {
     get,
     remove,
     save,
-    getNextBookId,
     getEmptyBook,
     getDefaultFilter,
     addReview,
@@ -24,8 +23,8 @@ function query(filterBy = {}) {
                 const regEXP = new RegExp(filterBy.title, 'i')
                 books = books.filter(book => regEXP.test(book.title))
             }
-            if (filterBy.minPrice) {
-                books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
+            if (filterBy.maxPrice) {
+                books = books.filter(book => book.listPrice.amount >= filterBy.maxPrice)
             }
             return books
         })
@@ -33,6 +32,7 @@ function query(filterBy = {}) {
 
 function get(bookId) {
     return storageService.get(BOOK_KEY, bookId)
+        .then(book => _setNextPrevBookId(book))
 }
 
 function remove(bookId) {
@@ -43,18 +43,20 @@ function save(book) {
     if (book.id) {
         return storageService.put(BOOK_KEY, book)
     } else {
-        const newBook = _createBook(book.title, book.amount)
-        return storageService.post(BOOK_KEY, newBook)
+        //     const newBook = _createBook(book.title, book.amount)
+        return storageService.post(BOOK_KEY, book)
     }
 }
 
-function getNextBookId(bookId) {
-    return storageService.query(BOOK_KEY)
-        .then(books => {
-            var idx = books.findIndex(book => book.id === bookId)
-            if (idx === books.length - 1) idx = -1
-            return books[idx + 1].id
-        })
+function _setNextPrevBookId(book) {
+    return storageService.query(BOOK_KEY).then((books) => {
+        const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
+        const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0]
+        const prevBook = books[bookIdx - 1] ? books[bookIdx - 1] : books[books.length - 1]
+        book.nextBookId = nextBook.id
+        book.prevBookId = prevBook.id
+        return book
+    })
 }
 
 function getEmptyBook(title = '', amount = '') {
@@ -83,7 +85,7 @@ function _createBook(title, amount = 120) {
     return book
 }
 
-function getDefaultFilter() { return { title: '', minPrice: '' } }
+function getDefaultFilter() { return { title: '', maxPrice: '' } }
 
 function addReview(bookId, review) {
     return storageService.get(BOOK_KEY, bookId)

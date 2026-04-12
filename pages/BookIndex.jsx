@@ -1,4 +1,3 @@
-
 import { BookList } from "../cmps/BookList.jsx"
 import { BookFilter } from "../cmps/BookFilter.jsx"
 import { bookService } from "../services/book.service.js"
@@ -44,7 +43,8 @@ export function BookIndex() {
     if (!books.length) return <div>Loading...</div>
     return (
         <section className="book-index">
-            <Link to="/book/edit">Add Book</Link>
+            <Link to="/book/add">Add Book</Link>
+            {/* <Link to="/book/edit">Add Book</Link> */}
             <BookFilter filterBy={filterBy}
                 onSetFilterBy={onSetFilterBy} />
             <BookList books={books}

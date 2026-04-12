@@ -13,7 +13,9 @@ export const bookService = {
     getEmptyBook,
     getDefaultFilter,
     addReview,
-    removeReview
+    removeReview,
+    addGoogleBook,
+    getGoogleBooks
 }
 
 function query(filterBy = {}) {
@@ -103,4 +105,48 @@ function removeReview(bookId, reviewId) {
             book.reviews = book.reviews.filter(R => R.id !== reviewId)
             return storageService.put(BOOK_KEY, book)
         })
+}
+
+function addGoogleBook(googleBook) {
+    return storageService.query(BOOK_KEY)
+        .then(books => {
+            const isExist = books.some(book => book.id === googleBook.id)
+            if (isExist) return Promise.reject('Book already exist')
+            const book = _getGoogleBooks(googleBook)
+            return storageService.post(BOOK_KEY, book, false)
+        })
+}
+
+function getGoogleBooks(searchTerm) {
+    if (!searchTerm) return Promise.resolve([])
+    const url = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchTerm}`
+    return fetch(url)
+        .then(res => res.json())
+        .then(result => result.items || [])
+}
+
+function _getGoogleBooks(googleBook) {
+    const { volumeInfo, saleInfo } = googleBook
+
+    // בדיקה בטוחה: אם אין imageLinks, שים תמונת ברירת מחדל
+    const googleThumb = (volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail)
+        ? volumeInfo.imageLinks.thumbnail
+        : 'assets/BooksImages/3.jpg' // או קישור לתמונה גנרית מהרשת
+
+    const thumbnail = googleThumb.replace('http://', 'https://')
+    return {
+        reviews: [],
+        id: googleBook.id,
+        title: volumeInfo.title,
+        pageCount: volumeInfo.pageCount || 0,
+        authors: volumeInfo.authors || [],
+        description: volumeInfo.description || '',
+        publishedDate: volumeInfo.publishedDate,
+        thumbnail: thumbnail,
+        listPrice: {
+            amount: (saleInfo && saleInfo.listPrice) ? saleInfo.listPrice.amount : '150',
+            currencyCode: 'ILS',
+            isOnSale: false
+        }
+    }
 }

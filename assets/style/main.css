@@ -10,7 +10,7 @@
 
 /* Components */
 @import 'cmps/app-header.css';
-@import 'cmps/usermsg.css';
+@import 'cmps/user-msg.css';
 @import 'cmps/preview.css';
 @import 'cmps/filter.css';
 @import 'cmps/list.css';

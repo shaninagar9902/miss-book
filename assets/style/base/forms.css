@@ -24,13 +24,18 @@ select:focus,
 textarea:focus {
   border-color: var(--clr1);
   background: var(--clr1bg-light);
-  box-shadow: 0 0 0 3px rgba(90,107,85,0.12);
+  box-shadow: 0 0 0 3px rgba(90, 107, 85, 0.12);
 }
 
 input::placeholder {
   color: var(--gray2);
   font-weight: 300;
 }
+
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
+
 
 label {
   font-size: 12px;

@@ -1,6 +1,8 @@
 const { useState } = React
 
 export function LongTxt({ txt, length = 100 }) {
+    if (!txt) return null
+    
     const [isLong, setIsLong] = useState(false)
 
     function onToggle() {

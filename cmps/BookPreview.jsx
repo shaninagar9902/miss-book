@@ -3,12 +3,12 @@ export function BookPreview({ book }) {
         <article className="book-preview">
             <h2>{book.title}</h2>
             <h4>Price: {book.listPrice.amount} {book.listPrice.currencyCode}</h4>
-            < img src={book.thumbnail}
+            <img src={book.thumbnail}
             // {/* <img src={`assets/BooksImages/${imgNum}.jpg`} alt={book.title} /> */}
             // onError={() => {
             //     src = `assets/BooksImages/${book.id}.jpg`
             // }}
-            />
+/>
         </article>
     )
 }

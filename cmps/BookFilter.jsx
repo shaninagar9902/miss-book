@@ -34,7 +34,7 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
                     <input id="title" name="title" type="text" value={title} placeholder="Filter by title..." onChange={handleChanges} />
                 </label>
                 <label htmlFor="maxPrice">Price:
-                    <input id="maxPrice" name="maxPrice" type="number" value={maxPrice || ''} placeholder="Filter by max price..." onChange={handleChanges} />
+                    <input id="maxPrice" name="maxPrice" type="number" value={maxPrice || ''} placeholder="Filter by price..." onChange={handleChanges} />
                 </label>
             </form>
         </section>
